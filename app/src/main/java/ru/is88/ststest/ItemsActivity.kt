@@ -35,17 +35,21 @@ class ItemsActivity : AppCompatActivity() {
         val list2 = ArrayList<Models.Event>()
         val list3 = ArrayList<Models.Move>()
 
-        val random1 = (3..33)
-        val random2 = (3..33)
-        val random3 = (3..33)
+        val random1 = (3..33).random()
+        val random2 = (3..33).random()
+        val random3 = (3..33).random()
 
-        for (i in random1) {
-            list1.add(Models.Notice(Date(i.toLong()), i.toString()))
+        for (i in 1..random1) {
+            val d1 = (70000000 .. 100000000).random()
+            list1.add(Models.Notice(Date(d1.toLong()), i.toString()))
         }
-        for (i in random2) {
-            list2.add(Models.Event(Date(i.toLong()), Date((i.toLong() + i.toLong())), i.toString()))
+        for (i in 1..random2) {
+            val d1 = (80000000 .. 100000000).random()
+            val k1 = (2 .. 3).random()
+            val d2 = d1 * k1
+            list2.add(Models.Event(Date(d1.toLong()), Date(d2.toLong()), i.toString()))
         }
-        for (i in random3) {
+        for (i in 1..random3) {
             list3.add(Models.Move(i.toString(), i.toString() + i.toString(), TimeInterval(i.toLong())))
         }
 
@@ -53,4 +57,6 @@ class ItemsActivity : AppCompatActivity() {
         list.addAll(list2)
         list.addAll(list3)
     }
+
+    fun IntRange.random() = (Math.random() * ((endInclusive + 1) - start) + start).toInt()
 }
